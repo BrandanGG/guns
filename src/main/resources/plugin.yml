@@ -1,0 +1,10 @@
+name: Guns
+version: '${project.version}'
+main: com.brandan.newguns.Main
+api-version: 1.20
+commands:
+  hoe:
+    description: Give a hoe
+    usage: /hoe <player> <type>
+    aliases:
+      - Hoe
