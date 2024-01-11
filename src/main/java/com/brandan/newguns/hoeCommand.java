@@ -14,11 +14,25 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
-public class Hoe implements CommandExecutor, TabCompleter {
+public class hoeCommand implements CommandExecutor, TabCompleter {
+
+    private final Map<String, ItemStack> hoeItem = createHoes();
+
+    private Map<String, ItemStack> createHoes() {
+        Map<String, ItemStack> hoes = new HashMap<>();
+        ItemStack diamond = hoesMeta("diamond");
+        ItemStack iron = hoesMeta("iron");
+        ItemStack stone = hoesMeta("stone");
+
+        hoes.put("diamond", diamond);
+        hoes.put("iron", iron);
+        hoes.put("stone", stone);
+
+        return hoes;
+    }
+
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (sender instanceof Player) {
@@ -32,7 +46,7 @@ public class Hoe implements CommandExecutor, TabCompleter {
             if (args.length == 2 && command.getName().equalsIgnoreCase("Hoe")) {
                 for (Player target : Bukkit.getOnlinePlayers()) {
                     if (target.getName().equalsIgnoreCase(args[0])) {
-                        ItemStack hoe = Hoes(args[1]);
+                        ItemStack hoe = hoeItem.get(args[1]);
                         if (hoe != null) {
                             target.getInventory().addItem(hoe);
                             target.sendMessage(Component.text("Received a " + args[1] + " Hoe", NamedTextColor.GREEN));
@@ -50,7 +64,10 @@ public class Hoe implements CommandExecutor, TabCompleter {
         return false;
     }
 
-    public ItemStack Hoes(String material) {
+    public ItemStack hoesMeta(String material) {
+
+
+
         if (material.equalsIgnoreCase("diamond")) {
             ItemStack diamond = new ItemStack(Material.DIAMOND_HOE);
             ItemMeta meta = diamond.getItemMeta();

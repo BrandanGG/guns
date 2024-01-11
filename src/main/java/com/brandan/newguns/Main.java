@@ -18,7 +18,7 @@ public final class Main extends JavaPlugin implements Listener {
     public void onEnable() {
         // Plugin startup logic
         Bukkit.getPluginManager().registerEvents(this, this);
-        getCommand("hoe").setExecutor(new Hoe());
+        getCommand("hoe").setExecutor(new hoeCommand());
     }
 
     @Override
