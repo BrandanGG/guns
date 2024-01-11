@@ -16,7 +16,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
-public class hoeCommand implements CommandExecutor, TabCompleter {
+public class HoeCommand implements CommandExecutor, TabCompleter {
 
     private final Map<String, ItemStack> hoeItem = createHoes();
 
